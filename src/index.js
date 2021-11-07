@@ -15,21 +15,20 @@ function allumerBouton(bouton, index) {
 function clickBouton(bouton, index) {
 	allumerBouton(bouton, index);
 
-	if(sequenceOrdi[tour] != index) {
+	if(sequenceOrdi[score] != index) {
 		gameOver();
 	} else {
-		tour++;
+		score++;
 	}
 
-	if(tour >= sequenceOrdi.length) {
+	if(score >= sequenceOrdi.length) {
 		sequenceJoueur.push(index);
 		tourSuivant();
-		tour = 0;
+		score = 0;
 	}
 }
 
 function gameOver() {
-	gameOverDiv.style.display = "block";
 	scoreSpan.innerHTML = sequenceOrdi.length-nombreSequenceDepart;
 }
 
@@ -51,24 +50,24 @@ function ajouterSequence() {
 }
 
 function presenterSequence() {
+    state.innerHTML = 'Computer is playing';
 	sequenceOrdi.forEach(function(element, i){
 		setTimeout(function(){
 			allumerBouton(boutons[parseInt(element)], element);
 		}, tempsAllume*i+(tempsAllume/2)*i);
 	});
+    state.innerHTML.replace('Computer is playing', 'Let\'s play');
 }
 
 function resetGame() {
-	gameOverDiv.style.display = "none";
-
 	sequenceOrdi = [];
 	sequenceJoueur = [];
-	tour = 0;
+	score = 0;
 	nombreSequenceDepart = 4;
 
 	tempsAllume = 400;
 
-	for(var i = 0 ; i < nombreSequenceDepart ; i++){
+	for(let i = 0 ; i < nombreSequenceDepart ; i++){
 		ajouterSequence();
 	}
 }
@@ -77,21 +76,26 @@ function startGame() {
 	presenterSequence();
 }
 
-var sequenceOrdi = [];
-var sequenceJoueur = [];
-var tour = 0;
-var nombreSequenceDepart = 4;
+let sequenceOrdi = [];
+let sequenceJoueur = [];
+let score = 0;
+let nombreSequenceDepart = 4;
 
-var tempsAllume = 400;
+let tempsAllume = 400;
 
-var boutons = document.querySelectorAll(".boutonJeux");
+let boutons = document.querySelectorAll(".boutonJeux");
+let state = document.querySelector('#state')
+let scoreDiv = document.querySelector('#score');
+let turnDiv = document.querySelector('#turn');
+state.innerHTML = 'Etat : ';
+scoreDiv.innerHTML = 'Score : ';
+scoreDiv.innerHTML += score;
 
-var sounds = new Array();
-for(var i = 0 ; i < boutons.length ; i++) {
-	sounds[i] = new Audio("sound/"+i+".ogg");
+let sounds = new Array();
+for(let i = 0 ; i < boutons.length ; i++) {
+	sounds[i] = new Audio("sounds/"+i+".ogg");
 }
 
 creerListener();
-
 resetGame();
 startGame();
