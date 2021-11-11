@@ -1,3 +1,21 @@
+let sequenceOrdi = [];
+let sequenceJoueur = [];
+let score = 0;
+let nombreSequenceDepart = 4;
+
+let tempsAllume = 400;
+
+let boutons = document.querySelectorAll(".boutonJeux");
+let state = document.querySelector('#state')
+let scoreDiv = document.querySelector('#score');
+let turnDiv = document.querySelector('#turn');
+state.innerHTML = 'Etat : ';
+
+let sounds = new Array();
+for(let i = 0 ; i < boutons.length ; i++) {
+	sounds[i] = new Audio("sounds/"+i+".ogg");
+}
+
 function eteindreBouton(bouton) {
 	bouton.id = bouton.id.split("-")[0]+"-off";
 }
@@ -16,20 +34,17 @@ function clickBouton(bouton, index) {
 	allumerBouton(bouton, index);
 
 	if(sequenceOrdi[score] != index) {
-		gameOver();
+		document.querySelector('.gameOver').innerHTML = 'Game Over'
 	} else {
 		score++;
+		scoreDiv.innerHTML = score;
 	}
 
 	if(score >= sequenceOrdi.length) {
 		sequenceJoueur.push(index);
 		tourSuivant();
-		score = 0;
+		console.log(score);
 	}
-}
-
-function gameOver() {
-	scoreSpan.innerHTML = sequenceOrdi.length-nombreSequenceDepart;
 }
 
 function creerListener() {
@@ -74,26 +89,6 @@ function resetGame() {
 
 function startGame() {
 	presenterSequence();
-}
-
-let sequenceOrdi = [];
-let sequenceJoueur = [];
-let score = 0;
-let nombreSequenceDepart = 4;
-
-let tempsAllume = 400;
-
-let boutons = document.querySelectorAll(".boutonJeux");
-let state = document.querySelector('#state')
-let scoreDiv = document.querySelector('#score');
-let turnDiv = document.querySelector('#turn');
-state.innerHTML = 'Etat : ';
-scoreDiv.innerHTML = 'Score : ';
-scoreDiv.innerHTML += score;
-
-let sounds = new Array();
-for(let i = 0 ; i < boutons.length ; i++) {
-	sounds[i] = new Audio("sounds/"+i+".ogg");
 }
 
 creerListener();

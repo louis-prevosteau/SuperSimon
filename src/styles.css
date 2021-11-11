@@ -87,3 +87,9 @@ body {
 #jeux {
 	position: relative;
 }
+
+.gameOver {
+	background-color: #f116167e;
+	color: black;
+	border-radius: 10%;
+}
