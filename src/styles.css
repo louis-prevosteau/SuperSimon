@@ -1,5 +1,6 @@
 body {
 	padding-top: 50px;
+	background-color: #d6c475;
 }
 
 #jeux:after{
@@ -9,7 +10,8 @@ body {
 }
 
 #boutons {
-	display: inline-block;
+	margin-left: 25%;
+	margin-right: 25%;
 }
 
 #boutons:after{
@@ -82,22 +84,6 @@ body {
 	border-bottom-right-radius: 100%;
 }
 
-#gameOver {
-	background-color: rgba(255, 255, 255, 0.5);
-	z-index: 1;
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	text-align: center;
-
-	font-size: 25px;
-}
-
-#scores {
-	float: right;
-}
-table {
-	border: 1px black solid;
-	text-align: center;
+#jeux {
+	position: relative;
 }
